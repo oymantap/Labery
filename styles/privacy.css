@@ -1,0 +1,19 @@
+/* --- Styling Khusus Privacy (privacy.css) --- */
+
+/* Gaya untuk paragraf penting atau sorotan */
+.section h3 {
+    color: var(--color-accent-hover);
+    margin-top: 25px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.contact-info {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.contact-info .button {
+    margin-top: 15px;
+}

@@ -1,0 +1,20 @@
+/* Hanya tambahkan gaya di sini jika ada elemen unik yang TIDAK ADA di style.css */
+
+/* Contoh: Styling khusus untuk daftar misi */
+#misi-kami ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#misi-kami li {
+    background: #f0f8ff; /* Warna latar belakang ringan */
+    margin-bottom: 10px;
+    padding: 10px;
+    border-left: 4px solid var(--color-accent);
+    border-radius: 4px;
+}
+
+/* Jika Anda ingin konten di halaman about lebih lebar/sempit dari main-content */
+.main-content {
+    /* override max-width jika perlu, tapi biasanya ini di style.css */
+}
