@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabel Kode Labery | Official Reference</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+<div class="top-nav">
+    <div class="nav-content container">
+        <a href="index.html" class="logo">LABERY</a>
+        <nav>
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="reader.html" class="nav-link">Pembaca Suara</a>
+            <a href="faq.html" class="nav-link">Bantuan</a>
+        </nav>
+    </div>
+</div>
+
+<header class="page-header">
+  <h2>Tabel Referensi Kode Labery</h2>
+  <p class="description">Daftar lengkap kode Titik (`.`) dan Koma (`,`) yang digunakan oleh Labery Translator.</p>
+</header>
+
+<main class="container main-content">
+    
+    <div id="code-table-container">
+        </div>
+
+</main>
+
+<footer class="footer">
+    <div class="container footer-content">
+        <div class="footer-links">
+            <a href="#about">Tentang Kami</a>
+            <a href="privacy.html">Kebijakan Privasi</a>
+            <a href="#contact">Kontak</a>
+        </div>
+        <p class="copyright">&copy; 2025 Labery. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="scripts/script.js"></script>
+<script>
+const code = {
+  // --- Huruf Kapital (Revisi W untuk keunikan) ---
+  A: ".", B: ",.", C: ",,", D: ".,", E: "..",
+  F: ",..", G: ".,...", H: "....", I: ".....",
+  J: ".,,,", K: ".,,", L: ",...", M: ",,,,",
+  N: ",,,", O: ".,,.", P: "..,",
+  Q: ",,.,", R: ",.,", S: "..,,", T: ",",
+  U: "...", V: "...,", W: "...,..", // Kode unik baru untuk W (tanpa spasi internal)
+  X: ",..,", Y: "..,.", Z: ",,,.",
+  
+  // --- KODE ANGKA BARU (0 - 9) ---
+  "1": ",,.,.",     // Satu (Unik)
+  "2": ",,..,",     // Dua (Unik)
+  "3": ",,..",      // Tiga (Unik)
+  "4": ",.,.,",     // Empat (Unik)
+  "5": ",.,,,",     // Lima (Unik)
+  "6": ",,....",    // Enam (Unik)
+  "7": ",,,.,",     // Tujuh (Unik)
+  "8": ",,,..",     // Delapan (Unik)
+  "9": ",,,,.",     // Sembilan (Unik)
+  "0": ",,,,,",     // Nol (Unik)
+  
+  // --- Simbol Baru (Semua Unik) ---
+  "!": "...,.",     // Tanda Seru
+  "?": ".,.,",      // Tanda Tanya
+  "@": ",.,..",     // Tanda At
+  "=": "....,",     // Tanda Sama Dengan
+  ".": ".,,..,",    // Titik
+  ",": ".,,,.",     // Koma
+};
+
+
+
+function generateTable() {
+    const container = document.getElementById('code-table-container');
+    let html = '<table>';
+    html += '<thead><tr><th>Karakter</th><th>Kode Labery</th></tr></thead>';
+    html += '<tbody>';
+
+    // Mendapatkan kunci-kunci dari objek kode dan mengurutkannya secara alfabetis/numerik
+    const sortedKeys = Object.keys(code).sort((a, b) => {
+        // Logika pengurutan: huruf, lalu angka, lalu simbol
+        if (a.length === 1 && b.length === 1) {
+            if (/[A-Z]/.test(a) && /[A-Z]/.test(b)) return a.localeCompare(b); // Huruf diurutkan
+            if (/[0-9]/.test(a) && /[0-9]/.test(b)) return parseInt(a) - parseInt(b); // Angka diurutkan
+        }
+        return a.localeCompare(b); // Sisanya diurutkan biasa
+    });
+
+    sortedKeys.forEach(char => {
+        const laberyCode = code[char];
+        html += `<tr><td>${char}</td><td class="code">${laberyCode}</td></tr>`;
+    });
+
+    html += '</tbody></table>';
+    container.innerHTML = html;
+}
+
+// Panggil fungsi setelah dokumen dimuat
+document.addEventListener('DOMContentLoaded', generateTable);
+
+// Tambahkan tautan baru ke nav bar di index.html dan reader.html
+// <a href="codes.html" class="nav-link">Tabel Kode</a>
+</script>
+
+</body>
+</html>

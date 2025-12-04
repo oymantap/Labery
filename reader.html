@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pembaca Suara Labery | Code Translator Tool</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+<div class="top-nav">
+    <div class="nav-content container">
+        <a href="index.html" class="logo">LABERY</a>
+        <nav>
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="codes.html" class="nav-link">Tabel Kode</a>
+            <a href="faq.html" class="nav-link">Bantuan</a>
+        </nav>
+    </div>
+</div>
+
+<header class="page-header">
+  <h2>Pembaca Suara Kode Labery</h2>
+  <p class="description">Tempel kode Labery (titik dan koma) di bawah ini untuk mendengarkannya.</p>
+</header>
+
+<main class="container main-content">
+  
+  <section class="section">
+    <label for="code-input">Masukkan Kode Labery:</label>
+    <textarea id="code-input" placeholder="Contoh: .,, . ..  ., ,.." rows="8"></textarea>
+  </section>
+
+  <div class="actions">
+    <button class="button primary" id="play-button" onclick="playCode()">
+        <span id="play-text">DENGARKAN KODE</span>
+    </button>
+    <button class="button secondary" onclick="document.getElementById('code-input').value = ''">
+        Hapus
+    </button>
+  </div>
+  
+  <section class="section">
+    <label>Pengaturan Suara:</label>
+    <div class="controls">
+        <label for="speed-slider">Kecepatan (WPM):</label>
+        <input type="range" id="speed-slider" min="10" max="40" value="20" step="5" oninput="updateSpeedDisplay(this.value)">
+        <span id="speed-value">20 WPM</span>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+    <div class="container footer-content">
+        <div class="footer-links">
+            <a href="#about">Tentang Kami</a>
+            <a href="privacy.html">Kebijakan Privasi</a>
+            <a href="#contact">Kontak</a>
+        </div>
+        <p class="copyright">&copy; 2025 Labery. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="scripts/script.js"></script>
+<script>
+// PENTING: Tentukan path file suara Anda di sini
+const AUDIO_PIB = new Audio('sound/pip.mp3'); 
+const AUDIO_BEEB = new Audio('sound/beeb.wav');
+
+let isPlaying = false;
+
+// Durasi dasar (contoh: 1 unit waktu dalam milidetik)
+let baseDuration = 120; // Default untuk 20 WPM (semakin kecil, semakin cepat)
+
+function updateSpeedDisplay(wpm) {
+    document.getElementById('speed-value').textContent = wpm + ' WPM';
+    // Menghitung ulang baseDuration: WPM tinggi = baseDuration kecil
+    baseDuration = 60000 / (50 * wpm); // Rumus estimasi Morse
+}
+
+// Fungsi utama untuk memainkan kode
+async function playCode() {
+    if (isPlaying) return; 
+
+    const input = document.getElementById('code-input').value.trim();
+    if (!input) return;
+
+    // Persiapan UI
+    isPlaying = true;
+    document.getElementById('play-text').textContent = 'MEMUTAR...';
+    document.getElementById('play-button').disabled = true;
+    updateSpeedDisplay(document.getElementById('speed-slider').value);
+
+
+    // Membagi kode: 
+    // Mengubah spasi kata (  ) menjadi karakter unik (|) agar mudah dipecah
+    let rawCodes = input.replace(/  /g, ' | ').split(/\s+/);
+
+    for (const code of rawCodes) {
+        if (!isPlaying) break; // Berhenti jika isPlaying diubah
+
+        // Jeda untuk spasi kata
+        if (code === '|') {
+            await sleep(baseDuration * 7); // Jeda 7 unit (Spasi Kata)
+            continue;
+        }
+
+        // Loop melalui setiap karakter dalam kode (misal: ".,.," -> [., ,., ,])
+        for (const symbol of code) {
+            if (!isPlaying) break;
+
+            if (symbol === '.') {
+                await playSound(AUDIO_PIB, baseDuration * 1);
+            } else if (symbol === ',') {
+                await playSound(AUDIO_BEEB, baseDuration * 3); // Jeda 3 unit untuk koma (dash)
+            }
+            
+            // Jeda antar simbol (1 unit)
+            await sleep(baseDuration * 1); 
+        }
+        
+        // Jeda antar kode (3 unit, sudah ada 1 unit di akhir loop symbol)
+        await sleep(baseDuration * 2); 
+    }
+
+    // Reset UI setelah selesai
+    isPlaying = false;
+    document.getElementById('play-text').textContent = 'DENGARKAN KODE';
+    document.getElementById('play-button').disabled = false;
+}
+
+// Fungsi bantu untuk memutar suara
+function playSound(audioElement, duration) {
+    return new Promise(resolve => {
+        // Hentikan dan mulai dari awal (penting untuk suara cepat)
+        audioElement.currentTime = 0; 
+        audioElement.play();
+
+        setTimeout(() => {
+            audioElement.pause();
+            resolve();
+        }, duration);
+    });
+}
+
+// Fungsi bantu untuk jeda waktu
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Inisialisasi awal
+document.addEventListener('DOMContentLoaded', () => {
+    updateSpeedDisplay(document.getElementById('speed-slider').value);
+});
+</script>
+
+</body>
+</html>

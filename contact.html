@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hubungi Kami | Labery Official</title>
+  <link rel="stylesheet" href="styles/contact.css"> 
+  <link rel="stylesheet" href="styles/style.css"> 
+</head>
+<body>
+
+<div class="top-nav">
+    <div class="nav-content container">
+        <a href="index.html" class="logo">LABERY</a>
+        <nav>
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="faq.html" class="nav-link">Bantuan</a>
+            <a href="about.html" class="nav-link">Tentang Kami</a>
+            <a href="#" class="nav-link active">Kontak</a>
+        </nav>
+    </div>
+</div>
+
+<header class="page-header">
+  <h2>Hubungi Tim Labery</h2>
+</header>
+
+<main class="container main-content" id="contact-content">
+  
+  <section class="section contact-options">
+    <h3>Opsi Chat Cepat</h3>
+    <p>Cara tercepat untuk mendapatkan bantuan atau memberikan masukan:</p>
+    
+    <div class="chat-buttons">
+        <a href="https://wa.me/+6288973338462" target="_blank" class="button chat-wa">
+            💬 Chat via WhatsApp
+        </a>
+        <a href="https://t.me/RyclXz" target="_blank" class="button chat-tg">
+            ✈️ Chat via Telegram
+        </a>
+    </div>
+    
+    <p class="note">Ganti <code>NOMORANDA</code> dan <code>USERNAME_ANDA</code> dengan info Anda!</p>
+  </section>
+
+  <hr>
+
+  <section class="section bot-form-section">
+    <h3>Kirim Pesan via Bot Telegram (Lanjutan)</h3>
+    <p>Anda dapat mengirim pesan langsung ke tim Labery melalui Bot Telegram kami (membutuhkan pengaturan Bot Telegram terlebih dahulu).</p>
+    
+    <form id="telegram-bot-form" class="contact-form">
+        <label for="user-name">Nama Anda:</label>
+        <input type="text" id="user-name" required>
+        
+        <label for="user-email">Email (Opsional):</label>
+        <input type="email" id="user-email">
+        
+        <label for="user-message">Pesan Anda:</label>
+        <textarea id="user-message" rows="5" required></textarea>
+        
+        <button type="submit" class="button primary" id="send-button">
+            Kirim Pesan
+        </button>
+        <p id="form-status" class="status-message"></p>
+    </form>
+  </section>
+  
+</main>
+
+<footer class="footer">
+    <div class="container footer-content">
+        <div class="footer-links">
+            <a href="about.html">Tentang Kami</a>
+            <a href="privacy.html">Kebijakan Privasi</a>
+            <a href="#">Kontak</a>
+        </div>
+        <p class="copyright">&copy; 2025 Labery. All rights reserved.</p>
+    </div>
+</footer>
+<script src="scripts/script.js"></script>
+<script src="scripts/contact.js"></script> 
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Labery Official | Code Translator Tool</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+<div class="top-nav">
+    <div class="nav-content container">
+        <a href="#" class="logo" id="theme-toggle">LABERY</a> 
+        <nav>
+            <a href="reader.html" class="nav-link active">Pembaca Suara</a>
+            <a href="codes.html" class="nav-link">Tabel Kode</a>
+            <a href="faq.html" class="nav-link">Bantuan</a>
+        </nav>
+    </div>
+</div>
+
+<header class="page-header">
+  <h2>Alat Penerjemah Kode Kustom,</h2>
+</header>
+
+<main class="container main-content">
+  
+  <section class="section">
+    <label for="input-text">Teks / Kode Sumber:</label>
+    <textarea id="input" placeholder="Masukkan teks atau kode di sini..."></textarea>
+  </section>
+
+  <div class="actions">
+    <button class="button primary" onclick="encode()">ENCODE</button>
+    <button class="button secondary" onclick="decode()">DECODE</button>
+  </div>
+  
+  <section class="section output-section-group">
+    <div class="output-header">
+      <label for="output-text">Hasil Terjemahan:</label>
+      <button class="button copy-button" onclick="copyOutput()">Salin</button>
+    </div>
+    <textarea id="output" placeholder="Hasil terjemahan akan muncul di sini..." readonly></textarea>
+  </section>
+
+</main>
+
+<footer class="footer">
+    <div class="container footer-content">
+        <div class="footer-links">
+            <a href="about.html">Tentang Kami</a>
+            <a href="privacy.html">Kebijakan Privasi</a>
+            <a href="contact.html">Kontak</a>
+        </div>
+        <p class="copyright">&copy; 2025 Labery. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="scripts/script.js"></script> 
+<script>
+// Pindahkan semua JS ke sini atau ke script.js
+const code = {
+  // --- Huruf Kapital ---
+  A: ".", B: ",.", C: ",,", D: ".,", E: "..",
+  F: ",..", G: ".,...", H: "....", I: ".....",
+  J: ".,,,", K: ".,,", L: ",...", M: ",,,,",
+  N: ",,,", O: ".,,.", P: "..,",
+  Q: ",,.,", R: ",.,", S: "..,,", T: ",",
+  U: "...", V: "...,", W: "...,..", 
+  X: ",..,", Y: "..,.", Z: ",,,.",
+  
+  // --- KODE ANGKA BARU (0 - 9) ---
+  "1": ",,.,.", "2": ",,..,", "3": ",,..", 
+  "4": ",.,.,", "5": ",.,,,", "6": ",,....", 
+  "7": ",,,.,", "8": ",,,..", "9": ",,,,.", 
+  "0": ",,,,,",
+  
+  // --- Simbol Baru (Semua Unik) ---
+  "!": "...,.", "?": ".,.,", "@": ",.,..",
+  "=": "....,", ".": ".,,..,", ",": ".,,,.",
+};
+
+// Deklarasi reverse HANYA SATU KALI
+const reverse = Object.fromEntries(
+  Object.entries(code).map(([k,v]) => [v,k])
+);
+
+function encode() {
+  let text = document.getElementById("input").value;
+  let out = [];
+  
+  for (let c of text) {
+    if (c === " ") {
+      out.push("  "); // Spasi kata
+    } else if (/[a-zA-Z]/.test(c)) {
+      out.push(code[c.toUpperCase()] || "?");
+    } else {
+      out.push(code[c] || "?"); 
+    }
+  }
+  document.getElementById("output").value = out.join(" ");
+}
+
+function decode() {
+  let text = document.getElementById("input").value.trim();
+  
+  // 1. Ganti spasi ganda (pemisah kata) menjadi karakter unik
+  let cleanedText = text.replace(/  /g, ' {SPACE} ');
+  
+  // 2. Split berdasarkan spasi tunggal dan decode
+  let decodedParts = cleanedText.split(' ').map(p => {
+      if (p === '{SPACE}') return ' '; // Mengembalikan spasi kata
+      return reverse[p] || '?';        // Decode kode Labery
+  });
+
+  document.getElementById("output").value = decodedParts.join('');
+}
+
+// FUNGSI copyOutput() YANG SUDAH DIPERBAIKI
+function copyOutput() {
+    const outputTextarea = document.getElementById("output");
+    
+    // Pastikan textarea memiliki konten sebelum menyalin
+    if (!outputTextarea.value) return; 
+
+    outputTextarea.select();
+    // Ini adalah cara standar untuk menyalin teks (meskipun navigator.clipboard lebih modern)
+    outputTextarea.setSelectionRange(0, 99999); 
+    
+    // Menggunakan API modern
+    navigator.clipboard.writeText(outputTextarea.value).then(() => {
+        const copyButton = document.querySelector('.copy-button');
+        copyButton.textContent = 'Tersalin!';
+        setTimeout(() => {
+            copyButton.textContent = 'Salin';
+        }, 1500);
+    }).catch(err => {
+        console.error('Gagal menyalin: ', err);
+        // Fallback jika navigator.clipboard tidak didukung
+        document.execCommand('copy'); 
+        alert('Gagal menyalin teks. Silakan salin secara manual.');
+    });
+}
+</script>
+</body>
+</html>

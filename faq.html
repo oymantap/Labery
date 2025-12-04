@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bantuan & FAQ | Labery Official</title>
+  <link rel="stylesheet" href="styles/faq.css"> 
+  <link rel="stylesheet" href="styles/style.css"> 
+</head>
+<body>
+
+<div class="top-nav">
+    <div class="nav-content container">
+        <a href="index.html" class="logo">LABERY</a>
+        <nav>
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="reader.html" class="nav-link">Pembaca Suara</a>
+            <a href="codes.html" class="nav-link">Tabel Kode</a>
+        </nav>
+    </div>
+</div>
+
+<header class="page-header">
+  <h2>Pusat Bantuan Labery (FAQ)</h2>
+</header>
+
+<main class="container main-content" id="help-content">
+  
+  <section class="section">
+    <h3>Panduan Penggunaan</h3>
+    <p>Di bawah ini adalah pertanyaan yang sering diajukan tentang cara kerja Labery Translator dan sistem kodenya.</p>
+    
+    <div class="faq-container" id="faq-list">
+        <div class="faq-item">
+            <button class="faq-question">Apa itu Kode Labery?</button>
+            <div class="faq-answer">
+                <p>Kode Labery adalah sistem enkripsi kustom yang menggunakan kombinasi dua simbol sederhana: Titik (<code>.</code>) dan Koma (<code>,</code>). Setiap huruf, angka, atau simbol memiliki kode uniknya sendiri.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <button class="faq-question">Bagaimana cara kerja Encode dan Decode?</button>
+            <div class="faq-answer">
+                <p><strong>Encode:</strong> Mengubah Teks Biasa menjadi urutan kode Labery. Setiap karakter dipisahkan oleh satu spasi tunggal.</p>
+                <p><strong>Decode:</strong> Mengubah urutan kode Labery kembali menjadi Teks Biasa.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Bagaimana cara merepresentasikan Spasi Kata?</button>
+            <div class="faq-answer">
+                <p>Spasi (pemisah antara kata) direpresentasikan oleh <strong>dua spasi ganda (<code>&nbsp;&nbsp;</code>)</strong> di dalam kode Labery.</p>
+                <p>Contoh: **H A L O** **D U N I A** akan menjadi kode dengan jeda dua spasi di tengahnya.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <button class="faq-question">Apa itu Pembaca Suara ("Pip" dan "Beeb")?</button>
+            <div class="faq-answer">
+                <p>Fitur Pembaca Suara mengubah kode Labery menjadi output audio. Titik (<code>.</code>) diwakili oleh suara "Pip" pendek, dan Koma (<code>,</code>) diwakili oleh suara "Beeb" yang lebih panjang, mirip dengan kode Morse.</p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+    <div class="container footer-content">
+        <div class="footer-links">
+            <a href="about.html">Tentang Kami</a>
+            <a href="privacy.html">Kebijakan Privasi</a>
+            <a href="#contact">Kontak</a>
+        </div>
+        <p class="copyright">&copy; 2025 Labery. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="scripts/script.js"></script>
+<script src="scripts/faq.js"></script> 
+</body>
+</html>
