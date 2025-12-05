@@ -251,49 +251,6 @@ textarea:focus {
     }
 }
 
-/* --- Styling Tabel Kode --- */
-#code-table-container {
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-#code-table-container table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 1em;
-}
-
-#code-table-container th, #code-table-container td {
-    border: 1px solid var(--color-border);
-    padding: 12px 15px;
-    text-align: left;
-}
-
-#code-table-container thead {
-    background-color: var(--color-accent);
-    color: white;
-}
-
-#code-table-container tbody tr:nth-child(even) {
-    background-color: #f7f7f7; /* Warna striping baris genap */
-}
-
-#code-table-container tbody tr:hover {
-    background-color: #f0f0f0; /* Efek hover */
-}
-
-#code-table-container td:first-child {
-    font-weight: bold;
-    width: 15%; /* Kolom karakter lebih sempit */
-    text-align: center;
-}
-
-#code-table-container .code {
-    font-family: var(--font-monospace);
-    letter-spacing: 1px;
-}
-
 /* --- Bagian Variabel Warna Dasar (Tambahkan atau revisi di style.css) --- */
 :root {
     /* Warna Mode Terang (Default) */

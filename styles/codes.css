@@ -1,0 +1,57 @@
+/* --- Styling Tabel Kode (codes.css) --- */
+
+#code-table-container {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* Tambahkan background container agar kontainer utama tabel terlihat di dark mode */
+    background-color: var(--color-surface); 
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#code-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1em;
+}
+
+#code-table-container th, #code-table-container td {
+    border: 1px solid var(--color-border);
+    padding: 12px 15px;
+    text-align: left;
+    /* Pastikan teks sel berubah */
+    color: var(--color-text-primary); 
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+#code-table-container thead {
+    background-color: var(--color-accent);
+    color: white;
+}
+
+#code-table-container tbody tr:nth-child(even) {
+    /* Ganti hardcoded color menjadi variabel Dark Mode ready */
+    background-color: var(--color-surface-light); 
+}
+
+#code-table-container tbody tr:nth-child(odd) {
+    /* Tambahkan background untuk baris ganjil agar kontras dengan genap */
+    background-color: var(--color-surface); 
+}
+
+#code-table-container tbody tr:hover {
+    /* Ganti hardcoded color menjadi variabel Dark Mode ready */
+    background-color: color-mix(in srgb, var(--color-surface), var(--color-border) 20%);
+}
+
+#code-table-container td:first-child {
+    font-weight: bold;
+    width: 15%; 
+    text-align: center;
+}
+
+#code-table-container .code {
+    font-family: var(--font-monospace);
+    letter-spacing: 1px;
+}
